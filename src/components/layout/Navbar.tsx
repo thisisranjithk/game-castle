@@ -1,11 +1,30 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../../assets/logo.png";
+import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
+import { useColorMode } from "@/components/ui/color-mode";
+import { LuMoon, LuSun } from "react-icons/lu";
 
 function Navbar() {
+  const { toggleColorMode, colorMode } = useColorMode();
   return (
-    <Flex gap={"2.5"} alignItems={"center"} height={"10vh"}>
-      <Image src={logo} alt="logo" boxSize="50px"></Image>
-      <Text>Game Castle</Text>
+    <Flex
+      gap={"2.5"}
+      alignItems={"center"}
+      height={"10vh"}
+      justifyContent={"space-between"}
+      padding={"0 5%"}
+    >
+      <HStack>
+        <Image src={logo} alt="logo" boxSize="50px"></Image>
+        <Text>Game Castle</Text>
+      </HStack>
+      <HStack>
+        <ClientOnly fallback={<Skeleton boxSize="8" />}>
+          <IconButton onClick={toggleColorMode} variant="outline" size="sm">
+            {colorMode === "light" ? <LuSun /> : <LuMoon />}
+          </IconButton>
+        </ClientOnly>
+      </HStack>
     </Flex>
   );
 }
