@@ -1,5 +1,6 @@
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, Image } from "@chakra-ui/react";
 import { Game } from "../../hooks/useGames";
+import PlatFormIcons from "./PlatFormIcons";
 
 interface Props {
   game: Game;
@@ -14,9 +15,12 @@ const GameCard = ({ game }: Props) => {
         width={"full"}
         height={"214px"}
       ></Image>
-      <CardBody>
-        <Heading>{game.name}</Heading>
-      </CardBody>
+      <Card.Body>
+        <Card.Title>{game.name}</Card.Title>
+        <PlatFormIcons
+          platfroms={game.parent_platforms.map((p) => p.platform)}
+        />
+      </Card.Body>
     </Card.Root>
   );
 };

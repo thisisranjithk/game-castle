@@ -13,7 +13,7 @@ const GameGrid = () => {
           md: 2,
           lg: 3,
         }}
-        gap={8}
+        gap={5}
         padding="2%"
       >
         {games.map((game) => (
