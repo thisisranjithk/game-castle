@@ -12,7 +12,6 @@ function Navbar() {
       alignItems={"center"}
       height={"10vh"}
       justifyContent={"space-between"}
-      padding={"0 5%"}
     >
       <HStack>
         <Image src={logo} alt="logo" boxSize="50px"></Image>

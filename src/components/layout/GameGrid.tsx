@@ -16,7 +16,6 @@ const GameGrid = () => {
           lg: 3,
         }}
         gap={5}
-        padding="2%"
       >
         {isLoading &&
           skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
