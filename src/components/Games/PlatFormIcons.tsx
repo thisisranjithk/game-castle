@@ -10,7 +10,7 @@ import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { Platform } from "@/hooks/useGames";
-import { Card, Flex, Icon } from "@chakra-ui/react";
+import { Box, Flex, Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
 interface Props {
@@ -30,13 +30,13 @@ const PlatFormIcons = ({ platfroms }: Props) => {
     web: BsGlobe,
   };
   return (
-    <Card.Description>
+    <Box>
       <Flex flexDirection={"row"} gap={3} mt={"10px"}>
         {platfroms.map((platfrom) => (
           <Icon key={platfrom.id} as={iconMap[platfrom.slug]}></Icon>
         ))}
       </Flex>
-    </Card.Description>
+    </Box>
   );
 };
 
