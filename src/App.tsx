@@ -8,6 +8,7 @@ import { Genre } from "./hooks/useGeners";
 import PlatformSelector from "./components/Games/PlatformSelector";
 import { Platform } from "./hooks/useGames";
 import SortSelector, { Sort } from "./components/Games/SortSelector";
+import GameHeading from "./components/Games/GameHeading";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -39,6 +40,10 @@ function App() {
       </GridItem>
 
       <GridItem area="main" padding={5}>
+        <GameHeading
+          genre={selectedGenre?.name}
+          platform={selectedPlatform?.name}
+        />
         <HStack>
           <PlatformSelector
             setSelectedPlatform={setSelectedPlatform}
