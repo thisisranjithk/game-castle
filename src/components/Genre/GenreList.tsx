@@ -1,9 +1,13 @@
-import useGeners from "@/hooks/useGeners";
+import useGeners, { Genre } from "@/hooks/useGeners";
 import { getCroppedImageUrl } from "@/services/image-url";
-import { Flex, Image, List, Text } from "@chakra-ui/react";
+import { Button, Flex, Image, List, Text } from "@chakra-ui/react";
 import GenreListItemSkeletem from "../Skeletons/GenreListItemSkeletem";
 
-const GenreList = () => {
+interface Props {
+  setSelectedGenre: (genre: Genre) => void;
+}
+
+const GenreList = ({ setSelectedGenre }: Props) => {
   const { data, isLoading, error } = useGeners();
   return (
     <List.Root listStyle="none">
@@ -11,7 +15,7 @@ const GenreList = () => {
       {isLoading && <GenreListItemSkeletem />}
       {data.map((genre) => (
         <List.Item key={genre.id} mb={3}>
-          <Flex gapX={3}>
+          <Flex>
             <Image
               src={getCroppedImageUrl(genre.image_background)}
               alt={genre.name}
@@ -19,7 +23,13 @@ const GenreList = () => {
               objectFit="cover"
               borderRadius="5px"
             ></Image>
-            <Text>{genre.name}</Text>
+            <Button
+              variant="plain"
+              fontSize="lg"
+              onClick={() => setSelectedGenre(genre)}
+            >
+              {genre.name}
+            </Button>
           </Flex>
         </List.Item>
       ))}

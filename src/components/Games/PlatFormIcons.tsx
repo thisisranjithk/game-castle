@@ -33,7 +33,7 @@ const PlatFormIcons = ({ platfroms }: Props) => {
     <Card.Description>
       <Flex flexDirection={"row"} gap={3} mt={"10px"}>
         {platfroms.map((platfrom) => (
-          <Icon as={iconMap[platfrom.slug]}></Icon>
+          <Icon key={platfrom.id} as={iconMap[platfrom.slug]}></Icon>
         ))}
       </Flex>
     </Card.Description>
