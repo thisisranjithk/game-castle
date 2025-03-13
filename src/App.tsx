@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { Grid, GridItem, HStack } from "@chakra-ui/react";
+import Navbar from "./components/layout/Navbar";
+import GameGrid from "./components/Games/GameGrid";
+import GenreList from "./components/Genre/GenreList";
+import { useState } from "react";
+import { Genre } from "./hooks/useGeners";
+import PlatformSelector from "./components/Games/PlatformSelector";
+import { Platform } from "./hooks/useGames";
+import SortSelector, { Sort } from "./components/Games/SortSelector";
+import GameHeading from "./components/Games/GameHeading";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+    null
+  );
+  const [selectedSort, setSelectedSort] = useState<Sort | null>(null);
+  const [searchValue, setSearchValue] = useState<string>("");
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Grid
+      templateAreas={{
+        base: `"nav" "main"`,
+        lg: `"nav nav" "aside main"`,
+      }}
+      templateColumns={{
+        base: "1fr",
+        lg: "250px 1fr",
+      }}
+    >
+      <GridItem area="nav" paddingX={5}>
+        <Navbar setSearchValue={setSearchValue} />
+      </GridItem>
+
+      <GridItem area="aside" hideBelow="lg" padding={5}>
+        <GenreList
+          setSelectedGenre={setSelectedGenre}
+          selectedGenre={selectedGenre}
+        />
+      </GridItem>
+
+      <GridItem area="main" padding={5}>
+        <GameHeading
+          genre={selectedGenre?.name}
+          platform={selectedPlatform?.name}
+        />
+        <HStack>
+          <PlatformSelector
+            setSelectedPlatform={setSelectedPlatform}
+            selectedPlatform={selectedPlatform}
+          />
+          <SortSelector
+            setSelectedSort={setSelectedSort}
+            selectedSort={selectedSort}
+          />
+        </HStack>
+        <GameGrid
+          selectedGenre={selectedGenre}
+          selectedPlatform={selectedPlatform}
+          selectedSort={selectedSort}
+          searchValue={searchValue}
+        />
+      </GridItem>
+    </Grid>
+  );
 }
 
-export default App
+export default App;
