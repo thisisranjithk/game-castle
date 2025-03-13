@@ -1,5 +1,4 @@
-import { Flex, HStack, Image, Text } from "@chakra-ui/react";
-import logo from "../../assets/logo.png";
+import { Flex, Text } from "@chakra-ui/react";
 import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
 import { useColorMode } from "@/components/ui/color-mode";
 import { LuMoon, LuSun } from "react-icons/lu";
@@ -18,18 +17,23 @@ function Navbar({ setSearchValue }: Props) {
       height={"10vh"}
       justifyContent={"space-between"}
     >
-      <HStack>
-        <Image src={logo} alt="logo" boxSize="50px"></Image>
-        <Text>Game Castle</Text>
-      </HStack>
-      <HStack>
+      <Text hideBelow="md" fontSize="4xl" fontFamily={"Spicy Rice"}>
+        Game Castle
+      </Text>
+      <Flex
+        width={{
+          base: "full",
+          md: "auto",
+        }}
+        gapX={5}
+      >
         <SearchInput setSearchValue={setSearchValue} />
         <ClientOnly fallback={<Skeleton boxSize="8" />}>
-          <IconButton onClick={toggleColorMode} variant="outline" size="sm">
+          <IconButton onClick={toggleColorMode} variant="outline" size="md">
             {colorMode === "light" ? <LuSun /> : <LuMoon />}
           </IconButton>
         </ClientOnly>
-      </HStack>
+      </Flex>
     </Flex>
   );
 }
