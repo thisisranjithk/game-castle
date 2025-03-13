@@ -5,10 +5,12 @@ import GenreListItemSkeletem from "../Skeletons/GenreListItemSkeletem";
 
 interface Props {
   setSelectedGenre: (genre: Genre) => void;
+  selectedGenre?: Genre | null;
 }
 
-const GenreList = ({ setSelectedGenre }: Props) => {
+const GenreList = ({ setSelectedGenre, selectedGenre }: Props) => {
   const { data, isLoading, error } = useGeners();
+
   return (
     <List.Root listStyle="none">
       {error && <Text>{error}</Text>}
@@ -26,6 +28,7 @@ const GenreList = ({ setSelectedGenre }: Props) => {
             <Button
               variant="plain"
               fontSize="lg"
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : ""}
               onClick={() => setSelectedGenre(genre)}
             >
               {genre.name}
