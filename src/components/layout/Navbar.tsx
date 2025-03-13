@@ -3,8 +3,13 @@ import logo from "../../assets/logo.png";
 import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
 import { useColorMode } from "@/components/ui/color-mode";
 import { LuMoon, LuSun } from "react-icons/lu";
+import SearchInput from "../common/SearchInput";
 
-function Navbar() {
+interface Props {
+  setSearchValue: (value: string) => void;
+}
+
+function Navbar({ setSearchValue }: Props) {
   const { toggleColorMode, colorMode } = useColorMode();
   return (
     <Flex
@@ -18,6 +23,7 @@ function Navbar() {
         <Text>Game Castle</Text>
       </HStack>
       <HStack>
+        <SearchInput setSearchValue={setSearchValue} />
         <ClientOnly fallback={<Skeleton boxSize="8" />}>
           <IconButton onClick={toggleColorMode} variant="outline" size="sm">
             {colorMode === "light" ? <LuSun /> : <LuMoon />}
