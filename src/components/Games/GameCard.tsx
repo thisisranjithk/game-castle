@@ -4,22 +4,13 @@ import PlatFormIcons from "./PlatFormIcons";
 import CriticScore from "./CriticScore";
 import { getCroppedImageUrl } from "@/services/image-url";
 import { ErrorBoundary } from "react-error-boundary";
+import { IconErrorFallback } from "@/utils/ErrorBoundary";
 
 interface Props {
   game: Game;
 }
 
 const GameCard = ({ game }: Props) => {
-  const ErrorFallback = ({ error }: { error: unknown }) => {
-    let errorMessage = "An unknown error occurred";
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-
-    return <div>Error loading icon: {errorMessage}</div>;
-  };
-
   return (
     <Card.Root overflow={"hidden"}>
       <Image
@@ -31,7 +22,7 @@ const GameCard = ({ game }: Props) => {
       <Card.Body>
         <Card.Title>{game.name}</Card.Title>
         <Flex justifyContent={"space-between"}>
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <ErrorBoundary FallbackComponent={IconErrorFallback}>
             <PlatFormIcons
               platfroms={game.parent_platforms.map((p) => p.platform)}
             />
