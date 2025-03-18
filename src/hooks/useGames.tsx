@@ -1,7 +1,9 @@
 import { Sort } from "@/components/Games/SortSelector";
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "@/services/api-client";
-import { FetchResponse, Game, Genre, Platform } from "@/utils/interfaces";
+import { Game, Genre, Platform } from "@/utils/interfaces";
+import APIClient from "@/services/api-client";
+
+const apiClient = new APIClient<Game>("/games");
 
 const useGames = (
   selectedGenre: Genre | null,
@@ -18,16 +20,14 @@ const useGames = (
       searchValue,
     ],
     queryFn: () =>
-      apiClient
-        .get<FetchResponse<Game>>("/games", {
-          params: {
-            genres: selectedGenre?.id,
-            platforms: selectedPlatform?.id,
-            ordering: selectedSort?.value,
-            search: searchValue,
-          },
-        })
-        .then((res) => res.data),
+      apiClient.getAll({
+        params: {
+          genres: selectedGenre?.id,
+          platforms: selectedPlatform?.id,
+          ordering: selectedSort?.value,
+          search: searchValue,
+        },
+      }),
   });
 
 export default useGames;
