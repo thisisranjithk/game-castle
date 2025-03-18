@@ -1,5 +1,5 @@
 import { Sort } from "@/components/Games/SortSelector";
-import useData from "./useData";
+import { useQuery } from "@tanstack/react-query";
 import apiClient from "@/services/api-client";
 import { FetchResponse, Game, Genre, Platform } from "@/utils/interfaces";
 
@@ -9,17 +9,25 @@ const useGames = (
   selectedSort: Sort | null,
   searchValue: string
 ) =>
-  useData<Game>(
-    "/games",
-    {
-      params: {
-        genres: selectedGenre?.id,
-        platforms: selectedPlatform?.id,
-        ordering: selectedSort?.value,
-        search: searchValue,
-      },
-    },
-    [selectedGenre?.id, selectedPlatform?.id, selectedSort?.value, searchValue]
-  );
+  useQuery({
+    queryKey: [
+      "games",
+      selectedGenre?.id,
+      selectedPlatform?.id,
+      selectedSort?.value,
+      searchValue,
+    ],
+    queryFn: () =>
+      apiClient
+        .get<FetchResponse<Game>>("/games", {
+          params: {
+            genres: selectedGenre?.id,
+            platforms: selectedPlatform?.id,
+            ordering: selectedSort?.value,
+            search: searchValue,
+          },
+        })
+        .then((res) => res.data),
+  });
 
 export default useGames;
