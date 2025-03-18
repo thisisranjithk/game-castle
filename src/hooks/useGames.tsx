@@ -1,19 +1,7 @@
 import { Sort } from "@/components/Games/SortSelector";
 import useData from "./useData";
-import { Genre } from "./useGeners";
-
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: Platform }[];
-  metacritic: number;
-}
+import apiClient from "@/services/api-client";
+import { FetchResponse, Game, Genre, Platform } from "@/utils/interfaces";
 
 const useGames = (
   selectedGenre: Genre | null,

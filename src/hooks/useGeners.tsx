@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "@/services/api-client";
-import { FetchResponse } from "@/utils/interfaces";
+import { FetchResponse, Genre } from "@/utils/interfaces";
 import { genres } from "@/utils/constants";
-export interface Genre {
-  id: number;
-  name: string;
-  image_background: string;
-}
 
 const useGeners = () =>
   useQuery({
