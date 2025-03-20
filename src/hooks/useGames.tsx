@@ -29,6 +29,7 @@ const useGames = (
           page: pageParam,
         },
       }),
+    refetchOnWindowFocus: false,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.next ? allPages.length + 1 : undefined;
