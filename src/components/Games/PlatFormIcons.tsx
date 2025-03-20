@@ -1,17 +1,17 @@
+import { Platform } from "@/utils/interfaces";
+import { Box, Flex, Icon } from "@chakra-ui/react";
+import { IconType } from "react-icons";
+import { BsGlobe } from "react-icons/bs";
 import {
-  FaWindows,
-  FaPlaystation,
-  FaXbox,
-  FaLinux,
   FaAndroid,
   FaApple,
+  FaLinux,
+  FaPlaystation,
+  FaWindows,
+  FaXbox,
 } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
-import { BsGlobe } from "react-icons/bs";
-import { Platform } from "@/hooks/useGames";
-import { Box, Flex, Icon } from "@chakra-ui/react";
-import { IconType } from "react-icons";
 
 interface Props {
   platfroms: Platform[];
