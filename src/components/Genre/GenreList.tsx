@@ -10,16 +10,15 @@ interface Props {
 
 const GenreList = ({ setSelectedGenre, selectedGenre }: Props) => {
   const { data, isLoading, error } = useGeners();
-
   return (
     <>
       <Heading fontSize="2xl" mb={5}>
         Genres
       </Heading>
       <List.Root listStyle="none">
-        {error && <Text>{error}</Text>}
+        {error && <Text>{error.message}</Text>}
         {isLoading && <GenreListItemSkeletem />}
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <List.Item key={genre.id} mb={3}>
             <Flex>
               <Image

@@ -1,19 +1,9 @@
 import { Sort } from "@/components/Games/SortSelector";
-import useData from "./useData";
-import { Genre } from "./useGeners";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { Game, Genre, Platform } from "@/utils/interfaces";
+import APIClient from "@/services/api-client";
 
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: Platform }[];
-  metacritic: number;
-}
+const apiClient = new APIClient<Game>("/games");
 
 const useGames = (
   selectedGenre: Genre | null,
@@ -21,17 +11,30 @@ const useGames = (
   selectedSort: Sort | null,
   searchValue: string
 ) =>
-  useData<Game>(
-    "/games",
-    {
-      params: {
-        genres: selectedGenre?.id,
-        platforms: selectedPlatform?.id,
-        ordering: selectedSort?.value,
-        search: searchValue,
-      },
+  useInfiniteQuery({
+    queryKey: [
+      "games",
+      selectedGenre?.id,
+      selectedPlatform?.id,
+      selectedSort?.value,
+      searchValue,
+    ],
+    queryFn: ({ pageParam }) =>
+      apiClient.getAll({
+        params: {
+          genres: selectedGenre?.id,
+          platforms: selectedPlatform?.id,
+          ordering: selectedSort?.value,
+          search: searchValue,
+          page: pageParam,
+        },
+      }),
+    refetchOnWindowFocus: false,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.next ? allPages.length + 1 : undefined;
     },
-    [selectedGenre?.id, selectedPlatform?.id, selectedSort?.value, searchValue]
-  );
+    staleTime: 24 * 60 * 60 * 1000, // 24h
+  });
 
 export default useGames;
