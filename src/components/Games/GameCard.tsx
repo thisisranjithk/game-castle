@@ -1,10 +1,10 @@
-import { Card, Flex, Image } from "@chakra-ui/react";
-import { Game } from "../../hooks/useGames";
-import PlatFormIcons from "./PlatFormIcons";
-import CriticScore from "./CriticScore";
 import { getCroppedImageUrl } from "@/services/image-url";
-import { ErrorBoundary } from "react-error-boundary";
 import { IconErrorFallback } from "@/utils/ErrorBoundary";
+import { Game } from "@/utils/interfaces";
+import { Card, Flex, Image } from "@chakra-ui/react";
+import { ErrorBoundary } from "react-error-boundary";
+import CriticScore from "./CriticScore";
+import PlatFormIcons from "./PlatFormIcons";
 
 interface Props {
   game: Game;

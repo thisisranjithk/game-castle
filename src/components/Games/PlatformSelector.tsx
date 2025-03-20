@@ -1,4 +1,3 @@
-import { Box, Button } from "@chakra-ui/react";
 import {
   MenuContent,
   MenuItem,
@@ -6,7 +5,8 @@ import {
   MenuTrigger,
 } from "@/components/ui/menu";
 import usePlatforms from "@/hooks/usePlatforms";
-import { Platform } from "@/hooks/useGames";
+import { Platform } from "@/utils/interfaces";
+import { Box, Button } from "@chakra-ui/react";
 
 interface Props {
   setSelectedPlatform: (platform: Platform) => void;
