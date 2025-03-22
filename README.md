@@ -4,11 +4,13 @@ Game Castle is a modern and fully responsive game discovery web application insp
 
 ## 🚀 Features
 
-- **Game Data** powered by the [RAWG API](https://rawg.io/apidocs)
-- **Genre, Platform, and Ordering Filters** to customize game discovery
-- **Search Functionality** for quick access to games
-- **Dark & Light Theme** for better user experience
-- **Responsive Design** using [Chakra UI](https://chakra-ui.com/)
+- **Game Data** powered by the [RAWG API](https://rawg.io/apidocs)  
+- **Genre, Platform, and Ordering Filters** to customize game discovery  
+- **Search Functionality** for quick access to games  
+- **Dark & Light Theme** for better user experience  
+- **Responsive Design** using [Chakra UI](https://chakra-ui.com/)  
+- **Efficient Data Fetching & Caching** with [React Query](https://tanstack.com/query/latest)  
+- **State Management** with [Zustand](https://github.com/pmndrs/zustand) for a simplified global state 
 
 ## 🛠️ Built With
 
