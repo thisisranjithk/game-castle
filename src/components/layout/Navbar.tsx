@@ -1,14 +1,9 @@
-import { Flex, Text } from "@chakra-ui/react";
-import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
 import { useColorMode } from "@/components/ui/color-mode";
+import { ClientOnly, Flex, IconButton, Skeleton, Text } from "@chakra-ui/react";
 import { LuMoon, LuSun } from "react-icons/lu";
 import SearchInput from "../common/SearchInput";
 
-interface Props {
-  setSearchValue: (value: string) => void;
-}
-
-function Navbar({ setSearchValue }: Props) {
+function Navbar() {
   const { toggleColorMode, colorMode } = useColorMode();
   return (
     <Flex
@@ -27,7 +22,7 @@ function Navbar({ setSearchValue }: Props) {
         }}
         gapX={5}
       >
-        <SearchInput setSearchValue={setSearchValue} />
+        <SearchInput />
         <ClientOnly fallback={<Skeleton boxSize="8" />}>
           <IconButton onClick={toggleColorMode} variant="outline" size="md">
             {colorMode === "light" ? <LuSun /> : <LuMoon />}

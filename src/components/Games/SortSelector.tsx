@@ -1,22 +1,20 @@
-import { Box, Button } from "@chakra-ui/react";
 import {
   MenuContent,
   MenuItem,
   MenuRoot,
   MenuTrigger,
 } from "@/components/ui/menu";
+import useGameQuery from "@/store";
+import { Box, Button } from "@chakra-ui/react";
 
 export interface Sort {
   value: string;
   label: string;
 }
 
-interface Props {
-  setSelectedSort: (selectedSort: Sort) => void;
-  selectedSort: Sort | null;
-}
-
-const SortSelector = ({ setSelectedSort, selectedSort }: Props) => {
+const SortSelector = () => {
+  const setSortOrder = useGameQuery((s) => s.setSortOrder);
+  const sortOrder = useGameQuery((s) => s.gameQuery.sortOrder);
   const sortOrders = [
     { value: "", label: "Relevence" },
     { value: "-added", label: "Date Added" },
@@ -25,12 +23,13 @@ const SortSelector = ({ setSelectedSort, selectedSort }: Props) => {
     { value: "-metacritic", label: "Popularity" },
     { value: "-rating", label: "Average Rating" },
   ];
+  const sortOrderLabel = sortOrders.find((order) => order.value === sortOrder);
   return (
     <Box mb={4}>
       <MenuRoot>
         <MenuTrigger asChild>
           <Button variant="outline" size="md">
-            {`Order By: ${selectedSort?.label || "Relevence"}`}
+            {`Order By: ${sortOrderLabel?.label ?? "Relevence"}`}
           </Button>
         </MenuTrigger>
         <MenuContent>
@@ -38,7 +37,7 @@ const SortSelector = ({ setSelectedSort, selectedSort }: Props) => {
             <MenuItem
               key={sortItem.label}
               value={sortItem.value}
-              onClick={() => setSelectedSort(sortItem)}
+              onClick={() => setSortOrder(sortItem?.value)}
             >
               {sortItem.label}
             </MenuItem>

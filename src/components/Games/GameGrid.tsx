@@ -1,37 +1,19 @@
 import useGames from "@/hooks/useGames";
-import { Genre, Platform } from "@/utils/interfaces";
 import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import GameCardSkeleton from "../Skeletons/GameCardSkeleton";
 import GameCard from "./GameCard";
-import { Sort } from "./SortSelector";
-import InfiniteScroll from "react-infinite-scroll-component";
 
-interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
-  selectedSort: Sort | null;
-  searchValue: string;
-}
-
-const GameGrid = ({
-  selectedGenre,
-  selectedPlatform,
-  selectedSort,
-  searchValue,
-}: Props) => {
-  const { error, data, isLoading, fetchNextPage, hasNextPage } = useGames(
-    selectedGenre,
-    selectedPlatform,
-    selectedSort,
-    searchValue
-  );
+const GameGrid = () => {
+  const { error, data, isLoading, fetchNextPage, hasNextPage } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   if (error) return <Text>{error.message}</Text>;
 
   const fetchedDataLength =
     data?.pages.reduce((acc, page) => acc + page.results.length, 0) || 0;
+
   return (
     <InfiniteScroll
       dataLength={fetchedDataLength}

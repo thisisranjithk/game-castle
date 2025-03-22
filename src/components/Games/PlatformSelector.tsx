@@ -4,16 +4,16 @@ import {
   MenuRoot,
   MenuTrigger,
 } from "@/components/ui/menu";
+import usePlatform from "@/hooks/usePlatform";
 import usePlatforms from "@/hooks/usePlatforms";
-import { Platform } from "@/utils/interfaces";
+import useGameQuery from "@/store";
 import { Box, Button } from "@chakra-ui/react";
 
-interface Props {
-  setSelectedPlatform: (platform: Platform) => void;
-  selectedPlatform: Platform | null;
-}
-const PlatformSelector = ({ setSelectedPlatform, selectedPlatform }: Props) => {
+const PlatformSelector = () => {
   const { data, error } = usePlatforms();
+  const setPlatformId = useGameQuery((s) => s.setPlatformId);
+  const platformId = useGameQuery((s) => s.gameQuery.platformId);
+  const platform = usePlatform(platformId);
 
   if (error) return null;
   return (
@@ -21,7 +21,7 @@ const PlatformSelector = ({ setSelectedPlatform, selectedPlatform }: Props) => {
       <MenuRoot>
         <MenuTrigger asChild>
           <Button variant="outline" size="md">
-            {selectedPlatform?.name || "Platforms"}
+            {platform?.name || "Platforms"}
           </Button>
         </MenuTrigger>
         <MenuContent>
@@ -29,7 +29,7 @@ const PlatformSelector = ({ setSelectedPlatform, selectedPlatform }: Props) => {
             <MenuItem
               key={platform.id}
               value={platform.name}
-              onClick={() => setSelectedPlatform(platform)}
+              onClick={() => setPlatformId(platform?.id)}
             >
               {platform.name}
             </MenuItem>
