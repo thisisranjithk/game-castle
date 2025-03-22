@@ -39,9 +39,11 @@ const GameGrid = ({
       next={() => fetchNextPage()}
       loader={<Spinner />}
       endMessage={
-        <Text textAlign="center" fontWeight="bold">
-          Yay! You have seen it all
-        </Text>
+        data && (
+          <Text textAlign="center" fontWeight="bold" mt={5}>
+            Yay! You have seen it all
+          </Text>
+        )
       }
     >
       <SimpleGrid
