@@ -17,6 +17,8 @@ Game Castle is a modern and fully responsive game discovery web application insp
 - [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - [Chakra UI](https://chakra-ui.com/) for styling
 - [RAWG API](https://rawg.io/apidocs) for game data
+- [React Query](https://tanstack.com/query/latest) for Data Fetching & Caching
+- [Zustand](https://github.com/pmndrs/zustand) for state management
 - [Vercel](https://vercel.com/) for deployment
 
 ## 🚀 Deployment
