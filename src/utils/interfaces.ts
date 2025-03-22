@@ -23,3 +23,10 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
   metacritic: number;
 }
+
+export interface GameQuery {
+  genreId?: number;
+  platformId?: number;
+  sortOrder?: string;
+  searchText?: string;
+}

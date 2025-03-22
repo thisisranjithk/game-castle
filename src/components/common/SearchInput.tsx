@@ -1,17 +1,16 @@
+import useGameQuery from "@/store";
 import { Input, Kbd } from "@chakra-ui/react";
-import { InputGroup } from "../ui/input-group";
 import { LuSearch } from "react-icons/lu";
 import { useDebouncedCallback } from "use-debounce";
+import { InputGroup } from "../ui/input-group";
 
-interface Props {
-  setSearchValue: (value: string) => void;
-}
+const SearchInput = () => {
+  const setSearchText = useGameQuery((s) => s.setSearchText);
 
-const SearchInput = ({ setSearchValue }: Props) => {
   const debounced = useDebouncedCallback(
     // function
     (value) => {
-      setSearchValue(value);
+      setSearchText(value);
     },
     // delay in ms
     800
