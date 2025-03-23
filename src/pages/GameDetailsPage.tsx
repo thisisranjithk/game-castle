@@ -3,7 +3,9 @@ import GameAttributes from "@/components/Games/GameAttributes";
 import GameScreenshots from "@/components/Games/GameScreenshots";
 import GameTrailer from "@/components/Games/GameTrailer";
 import useGame from "@/hooks/useGame";
+import { GameTailerFallback } from "@/utils/ErrorBoundary";
 import { Grid, GridItem, Heading, Spinner } from "@chakra-ui/react";
+import { ErrorBoundary } from "react-error-boundary";
 import { useParams } from "react-router-dom";
 
 const GameDetailsPage = () => {
@@ -36,7 +38,9 @@ const GameDetailsPage = () => {
         <GameAttributes game={game!} />
       </GridItem>
       <GridItem>
-        <GameTrailer gameId={gameSlug!} />
+        <ErrorBoundary FallbackComponent={GameTailerFallback}>
+          <GameTrailer gameId={gameSlug!} />
+        </ErrorBoundary>
         <GameScreenshots gameId={gameSlug!} />
       </GridItem>
     </Grid>
