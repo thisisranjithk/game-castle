@@ -10,7 +10,6 @@ const GameScreenshots = ({ gameId }: Props) => {
   if (isLoading) return null;
   if (error) throw error;
 
-  console.log(screenshots);
   return (
     <>
       <Heading my={5}>Screenshots</Heading>
