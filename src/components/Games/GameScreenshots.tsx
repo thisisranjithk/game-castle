@@ -1,4 +1,4 @@
-import useGameScreenshots from "@/hooks/useGameScreenShots";
+import useGameScreenshots from "@/hooks/useGameScreenshots";
 import { Grid, GridItem, Heading, Image } from "@chakra-ui/react";
 
 interface Props {
@@ -23,7 +23,11 @@ const GameScreenshots = ({ gameId }: Props) => {
       >
         {screenshots?.results?.map((screenshot) => (
           <GridItem key={screenshot.id}>
-            <Image src={screenshot.image} borderRadius={5} />
+            <Image
+              src={screenshot.image}
+              borderRadius={5}
+              alt={`screenshot${screenshot.id}`}
+            />
           </GridItem>
         ))}
       </Grid>
