@@ -3,7 +3,7 @@ import GameAttributes from "@/components/Games/GameAttributes";
 import GameScreenshots from "@/components/Games/GameScreenshots";
 import GameTrailer from "@/components/Games/GameTrailer";
 import useGame from "@/hooks/useGame";
-import { Flex, Heading, Spinner } from "@chakra-ui/react";
+import { Grid, GridItem, Heading, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 const GameDetailsPage = () => {
@@ -14,22 +14,32 @@ const GameDetailsPage = () => {
   if (error) throw error;
 
   return (
-    <Flex flexDirection="column" mx={5}>
-      <Heading
-        fontSize={{
-          base: "3xl",
-          md: "4xl",
-          lg: "5xl",
-        }}
-        my={5}
-      >
-        {game?.name}
-      </Heading>
-      <ExpandableText>{String(game?.description_raw)}</ExpandableText>
-      <GameAttributes game={game!} />
-      <GameTrailer gameId={gameSlug!} />
-      <GameScreenshots gameId={gameSlug!} />
-    </Flex>
+    <Grid
+      templateColumns={{
+        lg: "repeat(2, 1fr)",
+      }}
+      mx={5}
+      gap={5}
+    >
+      <GridItem>
+        <Heading
+          fontSize={{
+            base: "3xl",
+            md: "4xl",
+            lg: "5xl",
+          }}
+          my={5}
+        >
+          {game?.name}
+        </Heading>
+        <ExpandableText>{String(game?.description_raw)}</ExpandableText>
+        <GameAttributes game={game!} />
+      </GridItem>
+      <GridItem>
+        <GameTrailer gameId={gameSlug!} />
+        <GameScreenshots gameId={gameSlug!} />
+      </GridItem>
+    </Grid>
   );
 };
 
