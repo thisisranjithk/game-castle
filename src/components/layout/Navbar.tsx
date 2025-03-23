@@ -2,6 +2,7 @@ import { useColorMode } from "@/components/ui/color-mode";
 import { ClientOnly, Flex, IconButton, Skeleton, Text } from "@chakra-ui/react";
 import { LuMoon, LuSun } from "react-icons/lu";
 import SearchInput from "../common/SearchInput";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const { toggleColorMode, colorMode } = useColorMode();
@@ -11,10 +12,13 @@ function Navbar() {
       alignItems={"center"}
       height={"10vh"}
       justifyContent={"space-between"}
+      marginX={5}
     >
-      <Text hideBelow="md" fontSize="4xl" fontFamily={"Spicy Rice"}>
-        Game Castle
-      </Text>
+      <Link to="/">
+        <Text hideBelow="md" fontSize="4xl" fontFamily={"Spicy Rice"}>
+          Game Castle
+        </Text>
+      </Link>
       <Flex
         width={{
           base: "full",

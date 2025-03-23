@@ -10,6 +10,12 @@ export interface Genre {
   image_background: string;
 }
 
+export interface Publisher {
+  id: number;
+  name: string;
+  image_background: string;
+}
+
 export interface Platform {
   id: number;
   name: string;
@@ -20,8 +26,12 @@ export interface Game {
   id: number;
   name: string;
   background_image: string;
+  description_raw: string;
   parent_platforms: { platform: Platform }[];
+  genres: Genre[];
+  publishers: Publisher[];
   metacritic: number;
+  slug: string;
 }
 
 export interface GameQuery {
