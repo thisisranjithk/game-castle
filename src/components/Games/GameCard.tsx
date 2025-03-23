@@ -5,14 +5,23 @@ import { Card, Flex, Image } from "@chakra-ui/react";
 import { ErrorBoundary } from "react-error-boundary";
 import CriticScore from "./CriticScore";
 import PlatFormIcons from "./PlatFormIcons";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   game: Game;
 }
 
 const GameCard = ({ game }: Props) => {
+  const navigate = useNavigate();
   return (
-    <Card.Root overflow={"hidden"}>
+    <Card.Root
+      overflow={"hidden"}
+      onClick={() => navigate(`/games/${game?.slug}`)}
+      _hover={{
+        transform: "scale(1.03)",
+        transition: "transform .15s ease-in",
+      }}
+    >
       <Image
         src={getCroppedImageUrl(game.background_image)}
         alt={game.name}
