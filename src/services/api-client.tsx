@@ -26,6 +26,12 @@ class APIClient<T> {
       (res) => res.data
     );
   };
+
+  getTrailer = (id: number | string) => {
+    return AxiosInstance.get<T>(this.endpoint + "/" + id + "/movies").then(
+      (res) => res.data
+    );
+  };
 }
 
 export default APIClient;

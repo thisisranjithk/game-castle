@@ -7,7 +7,7 @@ const useGame = (slug?: string) => {
   return useQuery({
     queryKey: ["gameDetails", slug],
     queryFn: () => apiClient.get(slug || ""),
-    staleTime: 24 * 60 * 60 * 100,
+    staleTime: 24 * 60 * 60 * 100, //24h
     refetchOnWindowFocus: false,
   });
 };
