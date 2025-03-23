@@ -1,3 +1,6 @@
+import { Box, Text } from "@chakra-ui/react";
+import { CgUnavailable } from "react-icons/cg";
+
 export const IconErrorFallback = ({ error }: { error: unknown }) => {
   let errorMessage = "Error Loading Icons";
 
@@ -5,15 +8,29 @@ export const IconErrorFallback = ({ error }: { error: unknown }) => {
     console.log(error.message);
   }
 
-  return <div>{errorMessage}</div>;
+  return <Text>{errorMessage}</Text>;
 };
 
 export const GameTailerFallback = ({ error }: { error: unknown }) => {
-  let errorMessage = "Error Fetching Tailer";
+  let errorMessage = "Trailer Not Available";
 
   if (error instanceof Error) {
     console.log(error.message);
   }
 
-  return <div>{errorMessage}</div>;
+  return (
+    <Box
+      boxSize="sm"
+      borderRadius={5}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      width="full"
+      flexDirection="column"
+      border="1px solid grey"
+    >
+      <CgUnavailable size="140px" color="grey" />
+      <Text>{errorMessage}</Text>
+    </Box>
+  );
 };
