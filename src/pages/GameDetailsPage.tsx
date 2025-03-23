@@ -1,5 +1,6 @@
+import ExpandableText from "@/components/common/ExpandableText";
 import useGame from "@/hooks/useGame";
-import { Flex, Heading, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 const GameDetailsPage = () => {
@@ -10,10 +11,17 @@ const GameDetailsPage = () => {
   if (error) throw error;
   return (
     <Flex flexDirection="column" mx={5}>
-      <Heading fontSize="5xl" my={5}>
+      <Heading
+        fontSize={{
+          base: "3xl",
+          md: "4xl",
+          lg: "5xl",
+        }}
+        my={5}
+      >
         {data?.name}
       </Heading>
-      <Text>{data?.description_raw}</Text>
+      <ExpandableText>{String(data?.description_raw)}</ExpandableText>
     </Flex>
   );
 };
