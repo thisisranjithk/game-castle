@@ -16,7 +16,7 @@ interface Trailer {
 const apiClient = new APIClient<Trailer>("/games");
 const useGameTrailer = (gameSlug: string) => {
   return useQuery({
-    queryKey: ["gameTrailer"],
+    queryKey: ["gameTrailer", gameSlug],
     queryFn: () => apiClient.getTrailer(gameSlug),
     refetchOnWindowFocus: false,
     staleTime: 24 * 60 * 60 * 1000, // 24h

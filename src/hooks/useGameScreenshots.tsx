@@ -11,7 +11,7 @@ interface Screenshot {
 const useGameScreenshots = (id: string) => {
   const apiClient = new APIClient<Screenshot>(`/games/${id}/screenshots`);
   return useQuery({
-    queryKey: ["gameScreenshots"],
+    queryKey: ["gameScreenshots", id],
     queryFn: apiClient.getAll,
     refetchOnWindowFocus: false,
     staleTime: 24 * 60 * 60 * 1000, // 24h
