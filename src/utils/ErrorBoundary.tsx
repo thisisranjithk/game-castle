@@ -20,7 +20,7 @@ export const GameTailerFallback = ({ error }: { error: unknown }) => {
 
   return (
     <Box
-      boxSize="sm"
+      boxSize="fit"
       borderRadius={5}
       display="flex"
       alignItems="center"
@@ -28,9 +28,22 @@ export const GameTailerFallback = ({ error }: { error: unknown }) => {
       width="full"
       flexDirection="column"
       border="1px solid grey"
+      pt={{
+        base: 5,
+        md: 10,
+        lg: "20",
+      }}
     >
-      <CgUnavailable size="140px" color="grey" />
-      <Text>{errorMessage}</Text>
+      <CgUnavailable size={"7rem"} color="grey" />
+      <Text
+        mb={{
+          base: 5,
+          md: 10,
+          lg: "20",
+        }}
+      >
+        {errorMessage}
+      </Text>
     </Box>
   );
 };
